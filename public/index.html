@@ -193,29 +193,45 @@
 
         <!-- ==================== ADMIN PAGE ==================== -->
         <div class="page" id="page-admin">
-            <section class="section glass-card-static">
+            <section class="section glass-card-static" id="adminLoginPanel">
                 <div class="section-header">
-                    <h2>⚙️ Панель управления ЛХЛ</h2>
-                    <p>Привет, <strong id="adminUserName">admin@lhl.ru</strong> — роль: <span style="color:var(--accent-gold);font-weight:600;" id="adminRoleBadge">Администратор</span></p>
-                    <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="navigateTo('home')">Выйти</button>
+                    <h2>⚙️ Вход для сотрудников ЛХЛ</h2>
+                    <p>Авторизуйтесь, чтобы открыть панель управления.</p>
                 </div>
+                <form id="adminLoginForm" onsubmit="loginAdmin(event)" style="max-width:420px;margin:20px auto;">
+                    <label for="adminEmail">Email</label>
+                    <input id="adminEmail" name="email" type="email" autocomplete="username" required>
+                    <label for="adminPassword">Пароль</label>
+                    <input id="adminPassword" name="password" type="password" autocomplete="current-password" required>
+                    <p id="adminLoginError" role="alert" aria-live="polite"></p>
+                    <button class="btn btn-primary" type="submit">Войти</button>
+                </form>
             </section>
-            <div class="admin-layout">
-                <aside class="admin-sidebar glass-card-static" id="adminSidebar">
-                    <nav>
-                        <a class="active" data-admin-section="dashboard" onclick="switchAdminSection('dashboard',this)">📊 Сводка</a>
-                        <a data-admin-section="news" onclick="switchAdminSection('news',this)">📰 Новости</a>
-                        <a data-admin-section="matches" onclick="switchAdminSection('matches',this)">📅 Матчи</a>
-                        <a data-admin-section="teams" onclick="switchAdminSection('teams',this)">🛡 Команды</a>
-                        <a data-admin-section="players" onclick="switchAdminSection('players',this)">👤 Игроки</a>
-                        <a data-admin-section="standings" onclick="switchAdminSection('standings',this)">📊 Таблица</a>
-                    </nav>
-                </aside>
-                <div class="admin-content" id="adminContentArea"></div>
+            <div id="adminWorkspace" hidden>
+                <section class="section glass-card-static">
+                    <h2>⚙️ Панель управления ЛХЛ</h2>
+                    <p>Вы вошли как <strong id="adminUserName"></strong> — роль:
+                        <span style="color:var(--accent-gold);font-weight:600;" id="adminRoleBadge"></span>
+                    </p>
+                    <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="logoutAdmin()">Выйти</button>
+                </section>
+                <div class="admin-layout">
+                    <aside class="admin-sidebar glass-card-static" id="adminSidebar">
+                        <nav>
+                            <a class="active" data-admin-section="dashboard" onclick="switchAdminSection('dashboard',this)">📊 Сводка</a>
+                            <a data-admin-section="news" onclick="switchAdminSection('news',this)">📰 Новости</a>
+                            <a data-admin-section="matches" onclick="switchAdminSection('matches',this)">📅 Матчи</a>
+                            <a data-admin-section="teams" onclick="switchAdminSection('teams',this)">🛡 Команды</a>
+                            <a data-admin-section="players" onclick="switchAdminSection('players',this)">👤 Игроки</a>
+                            <a data-admin-section="standings" onclick="switchAdminSection('standings',this)">📊 Таблица</a>
+                        </nav>
+                    </aside>
+                    <div class="admin-content" id="adminContentArea"></div>
+                </div>
+                <section class="section glass-card-static" style="text-align:center;margin-top:16px;">
+                    <button class="btn btn-outline btn-sm" onclick="navigateTo('home')">🌐 Открыть сайт ЛХЛ</button>
+                </section>
             </div>
-            <section class="section glass-card-static" style="text-align:center;margin-top:16px;">
-                <button class="btn btn-outline btn-sm" onclick="navigateTo('home')">🌐 Открыть сайт ЛХЛ</button>
-            </section>
         </div>
 
         <!-- ==================== FOOTER ==================== -->

@@ -1,160 +1,84 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# LHL Hockey
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+An amateur hockey league website and REST API built with NestJS, TypeScript, PostgreSQL, and a responsive HTML/CSS/JavaScript frontend. League standings, team rosters, fixtures, results, and news are stored in PostgreSQL and loaded by the browser through the API.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Screenshots
 
-## Description
+Screenshots show the website with sample league records.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+| Homepage                                                       | Teams                                                   |
+| -------------------------------------------------------------- | ------------------------------------------------------- |
+| ![LHL Hockey homepage](public/screenshots/league-homepage.png) | ![League teams](public/screenshots/teams-directory.png) |
 
-## Project setup
+### Match schedule
+
+![League match schedule](public/screenshots/match-schedule.png)
+
+## Features
+
+- League homepage with standings, news, team directory, and match countdown.
+- Team profiles with roster, statistics, and match history.
+- Match schedule with status, week, and team filters.
+- PostgreSQL persistence for teams, players, matches, and news, initialized by a TypeORM migration.
+- Public REST endpoints: `GET /teams`, `GET /matches`, and `GET /news`.
+- JWT-protected staff login and role-guarded `GET /admin/dashboard`.
+- Request validation with `class-validator` and `ValidationPipe`.
+- Swagger UI at `/api/docs`.
+- NestJS unit tests, ESLint, Prettier, and TypeScript.
+
+## Local development
+
+Requirements: Node.js 20 or newer and PostgreSQL.
+
+1. Install dependencies:
+
+   ```bash
+   npm ci
+   ```
+
+2. Create a PostgreSQL database, copy `.env.example` to `.env`, and set `DATABASE_URL`.
+3. Generate a bcrypt password hash for the admin account:
+
+   ```bash
+   node -e "console.log(require('bcryptjs').hashSync('replace-this-password', 12))"
+   ```
+
+   Set the output as `ADMIN_PASSWORD_HASH`, choose `ADMIN_EMAIL`, and replace `JWT_SECRET` with a random secret of at least 32 characters. Never commit `.env`.
+
+4. Start the application:
+
+   ```bash
+   npm run start:dev
+   ```
+
+   TypeORM runs the initial schema and sample-data migration at startup. Open `http://localhost:3000`; API documentation is at `http://localhost:3000/api/docs`.
+
+## API
+
+| Method | Endpoint           | Access                  | Description                                  |
+| ------ | ------------------ | ----------------------- | -------------------------------------------- |
+| `GET`  | `/teams`           | Public                  | Teams and player rosters                     |
+| `GET`  | `/matches`         | Public                  | Fixtures and results                         |
+| `GET`  | `/news`            | Public                  | League news                                  |
+| `POST` | `/auth/login`      | Public                  | Exchange admin credentials for an 8-hour JWT |
+| `GET`  | `/admin/dashboard` | `admin` or `editor` JWT | Verify staff identity and role               |
+
+## Tests and quality checks
 
 ```bash
-$ npm install
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm test
+npm run test:e2e
+npm run lint
+npm run format
+npm run build
 ```
 
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+The repository includes a Render Blueprint in `render.yaml`. Create a Render PostgreSQL database, connect its internal connection string as `DATABASE_URL`, and set `ADMIN_EMAIL` and a bcrypt `ADMIN_PASSWORD_HASH` in the service environment. Render generates `JWT_SECRET`; the service runs `npm run build` and `npm run start:prod`. The initial database migration runs on service startup.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Set `DATABASE_SSL=true` only when the selected PostgreSQL provider requires TLS. Add the deployed URL to the repository About section after deployment.
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+## Repository topics
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
-# 🏒 ЛХЛ – Любительская Хоккейная Лига (NestJS)
-
-Полнофункциональный веб‑сайт любительской хоккейной лиги, построенный на **NestJS** и обслуживающий статический фронтенд (HTML, CSS, JS).  
-Сайт содержит страницы команд, матчей, административную панель, таймер обратного отсчёта, новости и многое другое.  
-Дизайн выполнен в стиле стекломорфизма с акцентами, вдохновлёнными КХЛ.
-
-![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=nestjs&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-
----
-
-## 📋 Содержание (Table of Contents)
-
-- [О проекте (About)](#о-проекте-about)
-- [Функциональность (Features)](#функциональность-features)
-- [Структура проекта (Project Structure)](#структура-проекта)
-- [Технологии (Tech Stack)](#технологии-tech-stack)
-- [Установка и запуск (Installation)](#установка-и-запуск)
-- [Использование (Usage)](#использование)
-- [Развёртывание (Deployment)](#развёртывание)
-- [Вклад (Contributing)](#вклад)
-- [Лицензия (License)](#лицензия)
-
----
-
-## О проекте (About)
-
-**ЛХЛ (Любительская Хоккейная Лига)** – это витрина для вымышленной хоккейной лиги, демонстрирующая возможности статического фронтенда, обёрнутого в современный бэкенд на NestJS.  
-Все данные (команды, игроки, матчи, новости) имитируются на стороне клиента, а серверная часть отвечает исключительно за раздачу статических файлов. Такой подход позволяет легко заменить мок‑данные на реальные API в будущем.
-
----
-
-## Функциональность (Features)
-
-- **Главная страница** – обратный отсчёт до ближайшего матча, сетка новостей, мини‑таблица лидеров, лента матчей с переключением вкладок.
-- **Страница команд** – каталог всех команд, при клике открывается детальная страница с вкладками: обзор, состав, матчи, статистика.
-- **Страница матчей** – расписание с фильтрацией по неделям, статусу (предстоящие/прошедшие) и поиском по команде. Просмотр голов при клике на матч.
-- **Административная панель** – сводка лиги, управление новостями, матчами, командами, игроками, таблица. Чисто фронтенд‑демонстрация.
-- **Подписка на рассылку** – эмуляция с валидацией e‑mail и всплывающим уведомлением.
-- **FAQ** – раскрывающиеся блоки с часто задаваемыми вопросами.
-- **Адаптивный дизайн** – стекломорфизм, анимированный фон, оптимизация под мобильные устройства.
-
----
-
-## Структура проекта
-
-```bash
-LHL-Hockey/
-├── public/                 # Статический фронтенд
-│   ├── index.html          # Разметка страниц
-│   ├── styles.css          # Полный CSS (стекломорфизм, анимации)
-│   └── script.js           # Клиентская логика, мок‑данные, навигация
-├── src/                    # Исходный код NestJS
-│   ├── app.module.ts       # Корневой модуль (подключает ServeStaticModule)
-│   └── main.ts             # Точка входа, запуск сервера
-├── .gitignore              # Исключает node_modules и dist
-├── package.json            # Зависимости и скрипты
-├── tsconfig.json           # Конфигурация TypeScript
-└── README.md               # Этот файл
+`nestjs` · `typescript` · `hockey`

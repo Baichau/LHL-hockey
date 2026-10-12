@@ -1,130 +1,8 @@
-// ==================== MOCK DATA ====================
-const teamsData = [
-    { id: 1, slug: 'belye-medvedi', name: 'Белые Медведи', city: 'Москва', colors: '#1a5276,#fff,#e03a3a', yearFounded: 2018,
-        coach: 'Игорь Соколов', players: 22, position: 1, points: 38, wins: 12, losses: 2, otl: 1, gf: 58, ga: 31,
-        description: 'Команда "Белые Медведи" — один из сильнейших коллективов лиги, основанный в 2018 году. Славится агрессивным атакующим стилем и надёжной обороной.',
-        achievements: 'Чемпионы ЛХЛ 2022, 2023. Финалисты Кубка Лиги 2024.', socials: { vk: '#',
-            tg: '#' } },
-    { id: 2, slug: 'krasnye-yastreby', name: 'Красные Ястребы', city: 'Санкт-Петербург', colors: '#c0392b,#f0b90b,#1a1a1a',
-        yearFounded: 2019, coach: 'Александр Волков', players: 20, position: 2, points: 34, wins: 10, losses: 3,
-        otl: 2, gf: 50, ga: 35,
-        description: 'Санкт-петербургские "Красные Ястребы" известны своей скоростной игрой и великолепной реализацией большинства.',
-        achievements: 'Серебряные призёры 2023. Бронза 2024.', socials: { vk: '#', tg: '#' } },
-    { id: 3, slug: 'sibirskie-volki', name: 'Сибирские Волки', city: 'Новосибирск', colors: '#2c3e50,#7f8c8d,#e67e22',
-        yearFounded: 2020, coach: 'Дмитрий Зайцев', players: 21, position: 3, points: 30, wins: 9, losses: 4, otl: 2,
-        gf: 44, ga: 36,
-        description: 'Суровая сибирская команда с характером. Делают ставку на физическую мощь и неуступчивость.',
-        achievements: 'Выход в плей-офф 2022, 2023, 2024.', socials: { vk: '#', tg: '#' } },
-    { id: 4, slug: 'uralskie-rysy', name: 'Уральские Рыси', city: 'Екатеринбург', colors: '#f39c12,#2c3e50,#fff',
-        yearFounded: 2021, coach: 'Павел Морозов', players: 19, position: 4, points: 27, wins: 8, losses: 5, otl: 2,
-        gf: 40, ga: 38,
-        description: 'Быстрые и техничные "Уральские Рыси" представляют Екатеринбург. Команда с большим потенциалом.',
-        achievements: 'Лучшая команда регулярного сезона по голам в меньшинстве 2023.', socials: { vk: '#',
-        tg: '#' } },
-    { id: 5, slug: 'kazanskie-barsy', name: 'Казанские Барсы', city: 'Казань', colors: '#27ae60,#fff,#1a1a1a',
-        yearFounded: 2019, coach: 'Рамиль Хабибуллин', players: 23, position: 5, points: 25, wins: 7, losses: 5,
-        otl: 3, gf: 37, ga: 33,
-        description: 'Казанская команда с богатыми традициями любительского хоккея. Отличная организация игры.',
-        achievements: 'Финалисты регионального турнира 2023.', socials: { vk: '#', tg: '#' } },
-    { id: 6, slug: 'dalnevostochnye-tigry', name: 'Дальневосточные Тигры', city: 'Владивосток', colors: '#e74c3c,#2c3e50,#f0b90b',
-        yearFounded: 2022, coach: 'Сергей Ким', players: 18, position: 6, points: 22, wins: 6, losses: 6, otl: 3,
-        gf: 33, ga: 40,
-        description: 'Самая восточная команда лиги. Молодой, амбициозный коллектив с бойцовским характером.',
-        achievements: 'Приз зрительских симпатий 2024.', socials: { vk: '#', tg: '#' } },
-    { id: 7, slug: 'kubanskie-griffony', name: 'Кубанские Грифоны', city: 'Краснодар', colors: '#8e44ad,#f0b90b,#fff',
-        yearFounded: 2021, coach: 'Андрей Петренко', players: 20, position: 7, points: 19, wins: 5, losses: 7, otl: 3,
-        gf: 30, ga: 42,
-        description: 'Южная команда с горячим темпераментом. Любят играть в атакующий хоккей с обилием бросков.',
-        achievements: 'Самая результативная команда среди новичков 2022.', socials: { vk: '#', tg: '#' } },
-    { id: 8, slug: 'nevskie-lvy', name: 'Невские Львы', city: 'Санкт-Петербург', colors: '#2980b9,#ecf0f1,#e03a3a',
-        yearFounded: 2020, coach: 'Максим Белов', players: 21, position: 8, points: 16, wins: 4, losses: 8, otl: 4,
-        gf: 28, ga: 45,
-        description: 'Вторая питерская команда в лиге. Принципиальные соперники "Красных Ястребов".',
-        achievements: 'Обладатели Кубка Fair Play 2023.', socials: { vk: '#', tg: '#' } },
-];
-
-const playersData = {
-    'belye-medvedi': [
-        { name: 'Алексей Смирнов', number: 10, position: 'Нападающий', age: 27, nationality: '🇷🇺', goals: 14,
-            assists: 18, pim: 12, avatar_color: '#1a5276' },
-        { name: 'Денис Ковалёв', number: 22, position: 'Защитник', age: 29, nationality: '🇷🇺', goals: 5, assists: 15,
-            pim: 22, avatar_color: '#2c3e50' },
-        { name: 'Максим Орлов', number: 30, position: 'Вратарь', age: 25, nationality: '🇷🇺', goals: 0, assists: 2,
-            pim: 0, avatar_color: '#c0392b' },
-        { name: 'Иван Петров', number: 15, position: 'Нападающий', age: 23, nationality: '🇷🇺', goals: 10, assists: 8,
-            pim: 14, avatar_color: '#e67e22' },
-        { name: 'Никита Волков', number: 7, position: 'Нападающий', age: 26, nationality: '🇷🇺', goals: 8,
-            assists: 12, pim: 8, avatar_color: '#27ae60' },
-    ],
-    'krasnye-yastreby': [
-        { name: 'Артём Громов', number: 9, position: 'Нападающий', age: 28, nationality: '🇷🇺', goals: 16,
-            assists: 14, pim: 10, avatar_color: '#c0392b' },
-        { name: 'Сергей Фёдоров', number: 17, position: 'Защитник', age: 30, nationality: '🇷🇺', goals: 4,
-            assists: 11, pim: 18, avatar_color: '#2c3e50' },
-        { name: 'Павел Дмитриев', number: 1, position: 'Вратарь', age: 27, nationality: '🇷🇺', goals: 0, assists: 1,
-            pim: 2, avatar_color: '#f0b90b' },
-    ],
-    'sibirskie-volki': [
-        { name: 'Роман Сидоров', number: 11, position: 'Нападающий', age: 26, nationality: '🇷🇺', goals: 12,
-            assists: 10, pim: 20, avatar_color: '#2c3e50' },
-        { name: 'Евгений Кузнецов', number: 5, position: 'Защитник', age: 31, nationality: '🇷🇺', goals: 3,
-            assists: 9, pim: 16, avatar_color: '#7f8c8d' },
-    ],
-};
-// Ensure all teams have at least some players
-teamsData.forEach(t => {
-    if (!playersData[t.slug]) {
-        playersData[t.slug] = [
-            { name: 'Игрок ' + t.name, number: 8, position: 'Нападающий', age: 25, nationality: '🇷🇺',
-                goals: 6, assists: 7, pim: 10, avatar_color: t.colors.split(',')[0] },
-            { name: 'Капитан Команды', number: 4, position: 'Защитник', age: 28, nationality: '🇷🇺', goals: 2,
-                assists: 5, pim: 14, avatar_color: '#2c3e50' },
-        ];
-    }
-});
-
-const matchesData = [
-    { id: 1, home_team_id: 1, away_team_id: 2, date: '2026-04-26T19:00:00', status: 'upcoming', week: 2,
-        home_score: null, away_score: null, goals: [], is_best: true },
-    { id: 2, home_team_id: 3, away_team_id: 4, date: '2026-04-25T17:30:00', status: 'past', week: 1, home_score: 3,
-        away_score: 2, goals: [{ scorer: 'Роман Сидоров', minute: 12, assist: 'Евгений Кузнецов' }, { scorer: 'Роман Сидоров',
-            minute: 28, assist: null }, { scorer: 'Игрок Уральские Рыси', minute: 35, assist: 'Капитан Команды' },
-        { scorer: 'Роман Сидоров', minute: 52, assist: null }, { scorer: 'Игрок Уральские Рыси', minute: 58,
-            assist: null }
-        ], is_best: true },
-    { id: 3, home_team_id: 5, away_team_id: 6, date: '2026-04-27T20:00:00', status: 'upcoming', week: 2,
-        home_score: null, away_score: null, goals: [], is_best: false },
-    { id: 4, home_team_id: 7, away_team_id: 8, date: '2026-04-24T16:00:00', status: 'past', week: 1, home_score: 4,
-        away_score: 5, goals: [{ scorer: 'Игрок Кубанские Грифоны', minute: 5, assist: null }, { scorer: 'Игрок Невские Львы',
-            minute: 14, assist: null }, { scorer: 'Игрок Кубанские Грифоны', minute: 22, assist: null }, { scorer: 'Игрок Невские Львы',
-            minute: 31, assist: null }, { scorer: 'Игрок Невские Львы', minute: 44, assist: null }, { scorer: 'Игрок Кубанские Грифоны',
-            minute: 50, assist: null }, { scorer: 'Игрок Невские Львы', minute: 55, assist: null }, { scorer: 'Игрок Невские Львы',
-            minute: 59, assist: null }, { scorer: 'Игрок Кубанские Грифоны', minute: 60,
-        assist: null }], is_best: true },
-    { id: 5, home_team_id: 1, away_team_id: 5, date: '2026-04-28T19:30:00', status: 'upcoming', week: 2,
-        home_score: null, away_score: null, goals: [], is_best: false },
-    { id: 6, home_team_id: 2, away_team_id: 3, date: '2026-04-23T18:00:00', status: 'past', week: 1, home_score: 2,
-        away_score: 1, goals: [{ scorer: 'Артём Громов', minute: 18, assist: 'Сергей Фёдоров' }, { scorer: 'Артём Громов',
-            minute: 42, assist: null }, { scorer: 'Роман Сидоров', minute: 55, assist: 'Евгений Кузнецов' }],
-        is_best: false },
-    { id: 7, home_team_id: 4, away_team_id: 6, date: '2026-04-29T20:30:00', status: 'upcoming', week: 3,
-        home_score: null, away_score: null, goals: [], is_best: false },
-    { id: 8, home_team_id: 8, away_team_id: 7, date: '2026-04-22T15:00:00', status: 'past', week: 1, home_score: 1,
-        away_score: 3, goals: [{ scorer: 'Игрок Невские Львы', minute: 25, assist: null }, { scorer: 'Игрок Кубанские Грифоны',
-            minute: 38, assist: null }, { scorer: 'Игрок Кубанские Грифоны', minute: 47, assist: null },
-        { scorer: 'Игрок Кубанские Грифоны', minute: 53, assist: null }], is_best: false },
-];
-
-const newsData = [
-    { id: 1, title: 'Финал сезона приближается!', date: '2026-04-20', image_emoji: '🏆',
-        excerpt: 'До финала плей-офф осталось всего две недели. Борьба за кубок обещает быть жаркой.' },
-    { id: 2, title: 'Новый рекорд посещаемости', date: '2026-04-18', image_emoji: '🎉',
-        excerpt: 'Матч "Белые Медведи" — "Красные Ястребы" собрал рекордные 1200 зрителей на трибунах.' },
-    { id: 3, title: 'Обновление правил лиги', date: '2026-04-15', image_emoji: '📋',
-        excerpt: 'Совет лиги утвердил новые правила по составу команд и лимиту на легионеров с сезона 2026/27.' },
-    { id: 4, title: 'Лучший игрок месяца — Артём Громов', date: '2026-04-10', image_emoji: '⭐',
-        excerpt: 'Нападающий "Красных Ястребов" признан лучшим игроком апреля по версии болельщиков и экспертов.' },
-];
+﻿// ==================== LEAGUE DATA ====================
+let teamsData = [];
+let playersData = {};
+let matchesData = [];
+let newsData = [];
 
 const faqData = [
     { q: 'Как создать команду для участия в ЛХЛ?',
@@ -138,11 +16,30 @@ const faqData = [
 
 const testimonialsData = [
     { name: 'Алексей С.', photo_emoji: '🧔', quote: 'ЛХЛ — это невероятный опыт! Атмосфера на матчах просто потрясающая. Горжусь, что играю здесь.' },
-    { name: 'Мария К.', photo_emoji: '👩‍🦰',
-    quote: 'Прихожу на каждый матч "Белых Медведей". Организация на высшем уровне, настоящий праздник хоккея!' },
+    { name: 'Мария К.', photo_emoji: '👩‍🦰', quote: 'Прихожу на каждый матч Белых Медведей. Организация на высшем уровне, настоящий праздник хоккея!' },
     { name: 'Дмитрий В.', photo_emoji: '👨', quote: 'Создал свою команду в ЛХЛ два года назад. Это лучший способ держать себя в форме и находить друзей.' },
 ];
 
+async function loadLeagueData() {
+    const [teams, matches, news] = await Promise.all([
+        fetchLeagueEndpoint('/teams'),
+        fetchLeagueEndpoint('/matches'),
+        fetchLeagueEndpoint('/news'),
+    ]);
+    if (!Array.isArray(teams) || !Array.isArray(matches) || !Array.isArray(news)) {
+        throw new Error('The league API returned an invalid response.');
+    }
+    teamsData = teams;
+    playersData = Object.fromEntries(teams.map(team => [team.slug, team.roster || []]));
+    matchesData = matches;
+    newsData = news;
+}
+
+async function fetchLeagueEndpoint(path, options = {}) {
+    const response = await fetch(path, options);
+    if (!response.ok) throw new Error(`League API request failed (${response.status}): ${path}`);
+    return response.json();
+}
 // ==================== STATE ====================
 let currentPage = 'home';
 let currentTeamSlug = null;
@@ -448,8 +345,64 @@ function filterMatches() {
 }
 
 // ==================== RENDER ADMIN PAGE ====================
-function renderAdminPage() {
-    switchAdminSection('dashboard', document.querySelector('#adminSidebar nav a[data-admin-section="dashboard"]'));
+async function renderAdminPage() {
+    const loginPanel = document.getElementById('adminLoginPanel');
+    const workspace = document.getElementById('adminWorkspace');
+    const token = localStorage.getItem('lhl_admin_token');
+    if (!token) {
+        loginPanel.hidden = false;
+        workspace.hidden = true;
+        return;
+    }
+
+    try {
+        const user = await fetchLeagueEndpoint('/admin/dashboard', {
+            headers: { Authorization: 'Bearer ' + token },
+        });
+        document.getElementById('adminUserName').textContent = user.email;
+        document.getElementById('adminRoleBadge').textContent = user.role;
+        loginPanel.hidden = true;
+        workspace.hidden = false;
+        switchAdminSection('dashboard', document.querySelector('#adminSidebar nav a[data-admin-section="dashboard"]'));
+    } catch (error) {
+        localStorage.removeItem('lhl_admin_token');
+        loginPanel.hidden = false;
+        workspace.hidden = true;
+        document.getElementById('adminLoginError').textContent = 'Сессия истекла. Войдите снова.';
+        if (error.message.includes('(401)') || error.message.includes('(403)')) return;
+        console.error(error);
+        showToast('Не удалось проверить права доступа. Повторите попытку.');
+    }
+}
+
+async function loginAdmin(event) {
+    event.preventDefault();
+    const errorMessage = document.getElementById('adminLoginError');
+    errorMessage.textContent = '';
+    const email = document.getElementById('adminEmail').value;
+    const password = document.getElementById('adminPassword').value;
+    try {
+        const result = await fetchLeagueEndpoint('/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
+        localStorage.setItem('lhl_admin_token', result.access_token);
+        document.getElementById('adminPassword').value = '';
+        await renderAdminPage();
+    } catch (error) {
+        errorMessage.textContent = error.message.includes('(401)')
+            ? 'Неверный email или пароль.'
+            : 'Не удалось выполнить вход. Проверьте подключение и повторите попытку.';
+        if (!error.message.includes('(401)')) console.error(error);
+    }
+}
+
+function logoutAdmin() {
+    localStorage.removeItem('lhl_admin_token');
+    document.getElementById('adminLoginForm').reset();
+    document.getElementById('adminLoginError').textContent = '';
+    renderAdminPage();
 }
 
 function switchAdminSection(section, linkEl) {
@@ -457,58 +410,43 @@ function switchAdminSection(section, linkEl) {
     document.querySelectorAll('#adminSidebar nav a').forEach(a => a.classList.remove('active'));
     if (linkEl) linkEl.classList.add('active');
     const contentArea = document.getElementById('adminContentArea');
-
-    const totalGoals = matchesData.filter(m => m.status === 'past').reduce((sum, m) => sum + (m.home_score || 0) + (
-        m.away_score || 0), 0);
+    const totalGoals = matchesData.filter(m => m.status === 'past').reduce((sum, m) =>
+        sum + (m.home_score || 0) + (m.away_score || 0), 0);
 
     if (section === 'dashboard') {
         contentArea.innerHTML = `
       <div class="metric-cards">
         <div class="metric-card glass-card"><div class="metric-icon">🛡</div><div class="metric-value">${teamsData.length}</div><div class="metric-label">Команд</div></div>
-        <div class="metric-card glass-card"><div class="metric-icon">👤</div><div class="metric-value">${teamsData.reduce((s,t)=>s+t.players,0)}</div><div class="metric-label">Игроков</div></div>
+        <div class="metric-card glass-card"><div class="metric-icon">👤</div><div class="metric-value">${Object.values(playersData).flat().length}</div><div class="metric-label">Игроков</div></div>
         <div class="metric-card glass-card"><div class="metric-icon">📅</div><div class="metric-value">${matchesData.filter(m=>m.status==='past').length}</div><div class="metric-label">Сыгранных матчей</div></div>
         <div class="metric-card glass-card"><div class="metric-icon">📰</div><div class="metric-value">${newsData.length}</div><div class="metric-label">Новостей</div></div>
         <div class="metric-card glass-card"><div class="metric-icon">🥅</div><div class="metric-value">${totalGoals}</div><div class="metric-label">Всего голов</div></div>
       </div>
-      <h3>⚡ Быстрые действия</h3>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
-        <button class="btn btn-primary btn-sm">+ Новость</button>
-        <button class="btn btn-primary btn-sm">+ Матч</button>
-        <button class="btn btn-outline btn-sm">+ Команду</button>
-        <button class="btn btn-outline btn-sm">+ Игрока</button>
-      </div>
-      <h4>📋 Последние действия:</h4>
-      <p style="color:var(--text-muted);">• Новость: "${newsData[0].title}" — ${newsData[0].date}</p>
-      <p style="color:var(--text-muted);">• Ближайший матч: ${new Date(matchesData.find(m=>m.status==='upcoming').date).toLocaleDateString('ru-RU')}</p>
-      <p style="color:var(--text-muted);">• Изменения в составах: обновлены данные игроков</p>
-      <div class="glass-card" style="padding:14px;margin-top:12px;background:rgba(240,185,11,0.08);">
-        <strong>💡 Совет:</strong> Проверьте расписание на следующую неделю — есть нераспределённые матчи.
-      </div>`;
+      <h3>Последняя новость</h3>
+      <p>${newsData[0]?.title || 'Новостей пока нет.'}</p>`;
     } else if (section === 'news') {
-        contentArea.innerHTML = '<h3>📰 Управление новостями</h3>' + newsData.map(n =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;"><strong>${n.title}</strong> — ${n.date} <button class="btn btn-outline btn-sm" style="float:right;">Редактировать</button></div>`
+        contentArea.innerHTML = '<h3>📰 Новости</h3>' + newsData.map(n =>
+            `<div class="glass-card" style="padding:14px;margin-bottom:8px;"><strong>${n.title}</strong> — ${n.date}</div>`
             ).join('');
     } else if (section === 'matches') {
-        contentArea.innerHTML = '<h3>📅 Управление матчами</h3>' + matchesData.slice(0, 5).map(m =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;">Матч #${m.id} — Неделя ${m.week} <button class="btn btn-outline btn-sm" style="float:right;">Редактировать</button></div>`
+        contentArea.innerHTML = '<h3>📅 Матчи</h3>' + matchesData.map(m =>
+            `<div class="glass-card" style="padding:14px;margin-bottom:8px;">Матч #${m.id} — Неделя ${m.week}</div>`
             ).join('');
     } else if (section === 'teams') {
-        contentArea.innerHTML = '<h3>🛡 Управление командами</h3>' + teamsData.map(t =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;"><strong>${t.name}</strong> — ${t.city} <button class="btn btn-outline btn-sm" style="float:right;">Редактировать</button></div>`
+        contentArea.innerHTML = '<h3>🛡 Команды</h3>' + teamsData.map(t =>
+            `<div class="glass-card" style="padding:14px;margin-bottom:8px;"><strong>${t.name}</strong> — ${t.city}</div>`
             ).join('');
     } else if (section === 'players') {
-        const allPlayers = Object.values(playersData).flat().slice(0, 8);
-        contentArea.innerHTML = '<h3>👤 Управление игроками</h3>' + allPlayers.map(p =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;">${p.name} — ${p.position} <button class="btn btn-outline btn-sm" style="float:right;">Редактировать</button></div>`
+        const allPlayers = Object.values(playersData).flat();
+        contentArea.innerHTML = '<h3>👤 Игроки</h3>' + allPlayers.map(p =>
+            `<div class="glass-card" style="padding:14px;margin-bottom:8px;">${p.name} — ${p.position}</div>`
             ).join('');
     } else if (section === 'standings') {
         contentArea.innerHTML = '<h3>📊 Турнирная таблица</h3>' + [...teamsData].sort((a, b) => b.points - a.points)
-            .map((t, i) =>
-                `<div class="glass-card" style="padding:14px;margin-bottom:8px;">#${i+1} ${t.name} — ${t.points} очков</div>`
-                ).join('');
+            .map((t, i) => `<div class="glass-card" style="padding:14px;margin-bottom:8px;">#${i+1} ${t.name} — ${t.points} очков</div>`)
+            .join('');
     }
 }
-
 // ==================== COUNTDOWN ====================
 function updateCountdown() {
     const upcomingMatch = matchesData.find(m => m.status === 'upcoming');
@@ -565,7 +503,16 @@ function showToast(message) {
 }
 
 // ==================== INIT ====================
-function init() {
+async function init() {
+    try {
+        await loadLeagueData();
+    } catch (error) {
+        console.error(error);
+        document.getElementById('homeNewsGrid').innerHTML =
+            '<p role="alert">Не удалось загрузить данные лиги. Проверьте подключение к серверу и обновите страницу.</p>';
+        return;
+    }
+
     renderHomePage();
     updateCountdown();
     setInterval(updateCountdown, 1000);
@@ -583,6 +530,11 @@ function init() {
     else if (hash === 'matches') navigateTo('matches');
     else if (hash === 'admin') navigateTo('admin');
     else navigateTo('home');
+    if (hash === 'teams') {
+        const storedSlug = sessionStorage.getItem('currentTeamSlug');
+        const team = teamsData.find(item => item.slug === storedSlug);
+        if (team) navigateTo('team-detail', team);
+    }
 
     // Update hash on navigation
     window.addEventListener('hashchange', () => {
@@ -610,18 +562,7 @@ navigateTo = function(page, data) {
     }
 };
 
-document.addEventListener('DOMContentLoaded', init);
-
-// Handle team-detail page on load from hash
-window.addEventListener('load', () => {
-    const storedSlug = sessionStorage.getItem('currentTeamSlug');
-    if (storedSlug && window.location.hash === '#teams') {
-        const team = teamsData.find(t => t.slug === storedSlug);
-        if (team) {
-            setTimeout(() => navigateTo('team-detail', team), 100);
-        }
-    }
-});
+document.addEventListener('DOMContentLoaded', () => { void init(); });
 
 console.log('🏒 ЛХЛ — Любительская Хоккейная Лига. Сайт загружен!');
 console.log('📄 Страницы: Главная, Команды, Матчи, Админ-панель');
