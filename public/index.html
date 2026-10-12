@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Расписание, новости, турнирная таблица и составы команд Любительской Хоккейной Лиги. Открытая демоверсия без регистрации.">
+    <meta name="theme-color" content="#0b1020">
     <title>ЛХЛ — Любительская Хоккейная Лига</title>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -20,7 +22,6 @@
             <li><a onclick="navigateTo('home')" class="active" data-page="home">Главная</a></li>
             <li><a onclick="navigateTo('teams')" data-page="teams">Команды</a></li>
             <li><a onclick="navigateTo('matches')" data-page="matches">Матчи</a></li>
-            <li><a onclick="navigateTo('admin')" data-page="admin" class="admin-link">Админ-панель</a></li>
         </ul>
     </nav>
 
@@ -32,6 +33,7 @@
             <section class="hero-section">
                 <h1>🏒 Настоящий хоккей для каждого</h1>
                 <p class="hero-subtitle">Любительская Хоккейная Лига — драйв, страсть и командный дух на льду. Присоединяйся к игре!</p>
+                <p style="margin-top:10px;color:var(--accent-gold);font-size:0.9rem;">Открытая демоверсия · 8 команд · без регистрации</p>
                 <button class="btn btn-primary" onclick="navigateTo('matches')">📅 Смотреть расписание</button>
             </section>
 
@@ -191,52 +193,9 @@
             </section>
         </div>
 
-        <!-- ==================== ADMIN PAGE ==================== -->
-        <div class="page" id="page-admin">
-            <section class="section glass-card-static" id="adminLoginPanel">
-                <div class="section-header">
-                    <h2>⚙️ Вход для сотрудников ЛХЛ</h2>
-                    <p>Авторизуйтесь, чтобы открыть панель управления.</p>
-                </div>
-                <form id="adminLoginForm" onsubmit="loginAdmin(event)" style="max-width:420px;margin:20px auto;">
-                    <label for="adminEmail">Email</label>
-                    <input id="adminEmail" name="email" type="email" autocomplete="username" required>
-                    <label for="adminPassword">Пароль</label>
-                    <input id="adminPassword" name="password" type="password" autocomplete="current-password" required>
-                    <p id="adminLoginError" role="alert" aria-live="polite"></p>
-                    <button class="btn btn-primary" type="submit">Войти</button>
-                </form>
-            </section>
-            <div id="adminWorkspace" hidden>
-                <section class="section glass-card-static">
-                    <h2>⚙️ Панель управления ЛХЛ</h2>
-                    <p>Вы вошли как <strong id="adminUserName"></strong> — роль:
-                        <span style="color:var(--accent-gold);font-weight:600;" id="adminRoleBadge"></span>
-                    </p>
-                    <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="logoutAdmin()">Выйти</button>
-                </section>
-                <div class="admin-layout">
-                    <aside class="admin-sidebar glass-card-static" id="adminSidebar">
-                        <nav>
-                            <a class="active" data-admin-section="dashboard" onclick="switchAdminSection('dashboard',this)">📊 Сводка</a>
-                            <a data-admin-section="news" onclick="switchAdminSection('news',this)">📰 Новости</a>
-                            <a data-admin-section="matches" onclick="switchAdminSection('matches',this)">📅 Матчи</a>
-                            <a data-admin-section="teams" onclick="switchAdminSection('teams',this)">🛡 Команды</a>
-                            <a data-admin-section="players" onclick="switchAdminSection('players',this)">👤 Игроки</a>
-                            <a data-admin-section="standings" onclick="switchAdminSection('standings',this)">📊 Таблица</a>
-                        </nav>
-                    </aside>
-                    <div class="admin-content" id="adminContentArea"></div>
-                </div>
-                <section class="section glass-card-static" style="text-align:center;margin-top:16px;">
-                    <button class="btn btn-outline btn-sm" onclick="navigateTo('home')">🌐 Открыть сайт ЛХЛ</button>
-                </section>
-            </div>
-        </div>
-
         <!-- ==================== FOOTER ==================== -->
         <footer class="footer" id="mainFooter">
-            <p>© 2024 ЛХЛ — Любительская Хоккейная Лига. Все права защищены.</p>
+            <p>© 2026 ЛХЛ — Любительская Хоккейная Лига. Демоверсия для портфолио.</p>
             <p style="font-size:0.75rem;margin-top:4px;">Сделано с ❤️ для хоккея</p>
         </footer>
     </div>

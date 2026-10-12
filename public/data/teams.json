@@ -1,0 +1,462 @@
+[
+  {
+    "id": 1,
+    "slug": "belye-medvedi",
+    "name": "Белые Медведи",
+    "city": "Москва",
+    "colors": "#1a5276,#fff,#e03a3a",
+    "yearFounded": 2018,
+    "coach": "Игорь Соколов",
+    "players": 5,
+    "position": 1,
+    "points": 38,
+    "wins": 12,
+    "losses": 2,
+    "otl": 1,
+    "gf": 58,
+    "ga": 31,
+    "description": "Команда \"Белые Медведи\" — один из сильнейших коллективов лиги, основанный в 2018 году. Славится агрессивным атакующим стилем и надёжной обороной.",
+    "achievements": "Чемпионы ЛХЛ 2022, 2023. Финалисты Кубка Лиги 2024.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 10,
+        "name": "Алексей Смирнов",
+        "number": 10,
+        "position": "Нападающий",
+        "age": 27,
+        "nationality": "🇷🇺",
+        "goals": 14,
+        "assists": 18,
+        "pim": 12,
+        "avatar_color": "#1a5276",
+        "avatarColor": "#1a5276"
+      },
+      {
+        "id": 22,
+        "name": "Денис Ковалёв",
+        "number": 22,
+        "position": "Защитник",
+        "age": 29,
+        "nationality": "🇷🇺",
+        "goals": 5,
+        "assists": 15,
+        "pim": 22,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      },
+      {
+        "id": 30,
+        "name": "Максим Орлов",
+        "number": 30,
+        "position": "Вратарь",
+        "age": 25,
+        "nationality": "🇷🇺",
+        "goals": 0,
+        "assists": 2,
+        "pim": 0,
+        "avatar_color": "#c0392b",
+        "avatarColor": "#c0392b"
+      },
+      {
+        "id": 15,
+        "name": "Иван Петров",
+        "number": 15,
+        "position": "Нападающий",
+        "age": 23,
+        "nationality": "🇷🇺",
+        "goals": 10,
+        "assists": 8,
+        "pim": 14,
+        "avatar_color": "#e67e22",
+        "avatarColor": "#e67e22"
+      },
+      {
+        "id": 7,
+        "name": "Никита Волков",
+        "number": 7,
+        "position": "Нападающий",
+        "age": 26,
+        "nationality": "🇷🇺",
+        "goals": 8,
+        "assists": 12,
+        "pim": 8,
+        "avatar_color": "#27ae60",
+        "avatarColor": "#27ae60"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "krasnye-yastreby",
+    "name": "Красные Ястребы",
+    "city": "Санкт-Петербург",
+    "colors": "#c0392b,#f0b90b,#1a1a1a",
+    "yearFounded": 2019,
+    "coach": "Александр Волков",
+    "players": 3,
+    "position": 2,
+    "points": 34,
+    "wins": 10,
+    "losses": 3,
+    "otl": 2,
+    "gf": 50,
+    "ga": 35,
+    "description": "Санкт-петербургские \"Красные Ястребы\" известны своей скоростной игрой и великолепной реализацией большинства.",
+    "achievements": "Серебряные призёры 2023. Бронза 2024.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 9,
+        "name": "Артём Громов",
+        "number": 9,
+        "position": "Нападающий",
+        "age": 28,
+        "nationality": "🇷🇺",
+        "goals": 16,
+        "assists": 14,
+        "pim": 10,
+        "avatar_color": "#c0392b",
+        "avatarColor": "#c0392b"
+      },
+      {
+        "id": 17,
+        "name": "Сергей Фёдоров",
+        "number": 17,
+        "position": "Защитник",
+        "age": 30,
+        "nationality": "🇷🇺",
+        "goals": 4,
+        "assists": 11,
+        "pim": 18,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      },
+      {
+        "id": 1,
+        "name": "Павел Дмитриев",
+        "number": 1,
+        "position": "Вратарь",
+        "age": 27,
+        "nationality": "🇷🇺",
+        "goals": 0,
+        "assists": 1,
+        "pim": 2,
+        "avatar_color": "#f0b90b",
+        "avatarColor": "#f0b90b"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "sibirskie-volki",
+    "name": "Сибирские Волки",
+    "city": "Новосибирск",
+    "colors": "#2c3e50,#7f8c8d,#e67e22",
+    "yearFounded": 2020,
+    "coach": "Дмитрий Зайцев",
+    "players": 2,
+    "position": 3,
+    "points": 30,
+    "wins": 9,
+    "losses": 4,
+    "otl": 2,
+    "gf": 44,
+    "ga": 36,
+    "description": "Суровая сибирская команда с характером. Делают ставку на физическую мощь и неуступчивость.",
+    "achievements": "Выход в плей-офф 2022, 2023, 2024.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 11,
+        "name": "Роман Сидоров",
+        "number": 11,
+        "position": "Нападающий",
+        "age": 26,
+        "nationality": "🇷🇺",
+        "goals": 12,
+        "assists": 10,
+        "pim": 20,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      },
+      {
+        "id": 5,
+        "name": "Евгений Кузнецов",
+        "number": 5,
+        "position": "Защитник",
+        "age": 31,
+        "nationality": "🇷🇺",
+        "goals": 3,
+        "assists": 9,
+        "pim": 16,
+        "avatar_color": "#7f8c8d",
+        "avatarColor": "#7f8c8d"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "uralskie-rysy",
+    "name": "Уральские Рыси",
+    "city": "Екатеринбург",
+    "colors": "#f39c12,#2c3e50,#fff",
+    "yearFounded": 2021,
+    "coach": "Павел Морозов",
+    "players": 2,
+    "position": 4,
+    "points": 27,
+    "wins": 8,
+    "losses": 5,
+    "otl": 2,
+    "gf": 40,
+    "ga": 38,
+    "description": "Быстрые и техничные \"Уральские Рыси\" представляют Екатеринбург. Команда с большим потенциалом.",
+    "achievements": "Лучшая команда регулярного сезона по голам в меньшинстве 2023.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 8,
+        "name": "Игрок Уральские Рыси",
+        "number": 8,
+        "position": "Нападающий",
+        "age": 25,
+        "nationality": "🇷🇺",
+        "goals": 6,
+        "assists": 7,
+        "pim": 10,
+        "avatar_color": "#f39c12",
+        "avatarColor": "#f39c12"
+      },
+      {
+        "id": 4,
+        "name": "Капитан Команды",
+        "number": 4,
+        "position": "Защитник",
+        "age": 28,
+        "nationality": "🇷🇺",
+        "goals": 2,
+        "assists": 5,
+        "pim": 14,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "kazanskie-barsy",
+    "name": "Казанские Барсы",
+    "city": "Казань",
+    "colors": "#27ae60,#fff,#1a1a1a",
+    "yearFounded": 2019,
+    "coach": "Рамиль Хабибуллин",
+    "players": 2,
+    "position": 5,
+    "points": 25,
+    "wins": 7,
+    "losses": 5,
+    "otl": 3,
+    "gf": 37,
+    "ga": 33,
+    "description": "Казанская команда с богатыми традициями любительского хоккея. Отличная организация игры.",
+    "achievements": "Финалисты регионального турнира 2023.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 8,
+        "name": "Игрок Казанские Барсы",
+        "number": 8,
+        "position": "Нападающий",
+        "age": 25,
+        "nationality": "🇷🇺",
+        "goals": 6,
+        "assists": 7,
+        "pim": 10,
+        "avatar_color": "#27ae60",
+        "avatarColor": "#27ae60"
+      },
+      {
+        "id": 4,
+        "name": "Капитан Команды",
+        "number": 4,
+        "position": "Защитник",
+        "age": 28,
+        "nationality": "🇷🇺",
+        "goals": 2,
+        "assists": 5,
+        "pim": 14,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "dalnevostochnye-tigry",
+    "name": "Дальневосточные Тигры",
+    "city": "Владивосток",
+    "colors": "#e74c3c,#2c3e50,#f0b90b",
+    "yearFounded": 2022,
+    "coach": "Сергей Ким",
+    "players": 2,
+    "position": 6,
+    "points": 22,
+    "wins": 6,
+    "losses": 6,
+    "otl": 3,
+    "gf": 33,
+    "ga": 40,
+    "description": "Самая восточная команда лиги. Молодой, амбициозный коллектив с бойцовским характером.",
+    "achievements": "Приз зрительских симпатий 2024.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 8,
+        "name": "Игрок Дальневосточные Тигры",
+        "number": 8,
+        "position": "Нападающий",
+        "age": 25,
+        "nationality": "🇷🇺",
+        "goals": 6,
+        "assists": 7,
+        "pim": 10,
+        "avatar_color": "#e74c3c",
+        "avatarColor": "#e74c3c"
+      },
+      {
+        "id": 4,
+        "name": "Капитан Команды",
+        "number": 4,
+        "position": "Защитник",
+        "age": 28,
+        "nationality": "🇷🇺",
+        "goals": 2,
+        "assists": 5,
+        "pim": 14,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "kubanskie-griffony",
+    "name": "Кубанские Грифоны",
+    "city": "Краснодар",
+    "colors": "#8e44ad,#f0b90b,#fff",
+    "yearFounded": 2021,
+    "coach": "Андрей Петренко",
+    "players": 2,
+    "position": 7,
+    "points": 19,
+    "wins": 5,
+    "losses": 7,
+    "otl": 3,
+    "gf": 30,
+    "ga": 42,
+    "description": "Южная команда с горячим темпераментом. Любят играть в атакующий хоккей с обилием бросков.",
+    "achievements": "Самая результативная команда среди новичков 2022.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 8,
+        "name": "Игрок Кубанские Грифоны",
+        "number": 8,
+        "position": "Нападающий",
+        "age": 25,
+        "nationality": "🇷🇺",
+        "goals": 6,
+        "assists": 7,
+        "pim": 10,
+        "avatar_color": "#8e44ad",
+        "avatarColor": "#8e44ad"
+      },
+      {
+        "id": 4,
+        "name": "Капитан Команды",
+        "number": 4,
+        "position": "Защитник",
+        "age": 28,
+        "nationality": "🇷🇺",
+        "goals": 2,
+        "assists": 5,
+        "pim": 14,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "nevskie-lvy",
+    "name": "Невские Львы",
+    "city": "Санкт-Петербург",
+    "colors": "#2980b9,#ecf0f1,#e03a3a",
+    "yearFounded": 2020,
+    "coach": "Максим Белов",
+    "players": 2,
+    "position": 8,
+    "points": 16,
+    "wins": 4,
+    "losses": 8,
+    "otl": 4,
+    "gf": 28,
+    "ga": 45,
+    "description": "Вторая питерская команда в лиге. Принципиальные соперники \"Красных Ястребов\".",
+    "achievements": "Обладатели Кубка Fair Play 2023.",
+    "socials": {
+      "vk": "#",
+      "tg": "#"
+    },
+    "roster": [
+      {
+        "id": 8,
+        "name": "Игрок Невские Львы",
+        "number": 8,
+        "position": "Нападающий",
+        "age": 25,
+        "nationality": "🇷🇺",
+        "goals": 6,
+        "assists": 7,
+        "pim": 10,
+        "avatar_color": "#2980b9",
+        "avatarColor": "#2980b9"
+      },
+      {
+        "id": 4,
+        "name": "Капитан Команды",
+        "number": 4,
+        "position": "Защитник",
+        "age": 28,
+        "nationality": "🇷🇺",
+        "goals": 2,
+        "assists": 5,
+        "pim": 14,
+        "avatar_color": "#2c3e50",
+        "avatarColor": "#2c3e50"
+      }
+    ]
+  }
+]

@@ -21,18 +21,40 @@ const testimonialsData = [
 ];
 
 async function loadLeagueData() {
-    const [teams, matches, news] = await Promise.all([
-        fetchLeagueEndpoint('/teams'),
-        fetchLeagueEndpoint('/matches'),
-        fetchLeagueEndpoint('/news'),
-    ]);
+    let teams;
+    let matches;
+    let news;
+    try {
+        [teams, matches, news] = await Promise.all([
+            fetchLeagueEndpoint('/teams'),
+            fetchLeagueEndpoint('/matches'),
+            fetchLeagueEndpoint('/news'),
+        ]);
+        if (!Array.isArray(teams) || !Array.isArray(matches) || !Array.isArray(news)) {
+            throw new Error('The league API returned an invalid response.');
+        }
+    } catch (error) {
+        console.info('League API is not connected; loading the public demo data.');
+        const baseUrl = new URL('script.js', window.location.href);
+        [teams, matches, news] = await Promise.all([
+            fetchDemoEndpoint(new URL('data/teams.json', baseUrl)),
+            fetchDemoEndpoint(new URL('data/matches.json', baseUrl)),
+            fetchDemoEndpoint(new URL('data/news.json', baseUrl)),
+        ]);
+    }
     if (!Array.isArray(teams) || !Array.isArray(matches) || !Array.isArray(news)) {
-        throw new Error('The league API returned an invalid response.');
+        throw new Error('The league API or demo data returned an invalid response.');
     }
     teamsData = teams;
     playersData = Object.fromEntries(teams.map(team => [team.slug, team.roster || []]));
     matchesData = matches;
     newsData = news;
+}
+
+async function fetchDemoEndpoint(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Demo data request failed (${response.status}): ${url}`);
+    return response.json();
 }
 
 async function fetchLeagueEndpoint(path, options = {}) {
@@ -70,7 +92,6 @@ function navigateTo(page, data = null) {
     }
     if (page === 'teams') renderTeamsPage();
     if (page === 'matches') renderMatchesPage();
-    if (page === 'admin') renderAdminPage();
     if (page === 'home') renderHomePage();
 
     // Close mobile menu
@@ -344,109 +365,6 @@ function filterMatches() {
     }).join('') || '<p style="padding:20px;color:var(--text-muted);">Матчи не найдены по заданным фильтрам.</p>';
 }
 
-// ==================== RENDER ADMIN PAGE ====================
-async function renderAdminPage() {
-    const loginPanel = document.getElementById('adminLoginPanel');
-    const workspace = document.getElementById('adminWorkspace');
-    const token = localStorage.getItem('lhl_admin_token');
-    if (!token) {
-        loginPanel.hidden = false;
-        workspace.hidden = true;
-        return;
-    }
-
-    try {
-        const user = await fetchLeagueEndpoint('/admin/dashboard', {
-            headers: { Authorization: 'Bearer ' + token },
-        });
-        document.getElementById('adminUserName').textContent = user.email;
-        document.getElementById('adminRoleBadge').textContent = user.role;
-        loginPanel.hidden = true;
-        workspace.hidden = false;
-        switchAdminSection('dashboard', document.querySelector('#adminSidebar nav a[data-admin-section="dashboard"]'));
-    } catch (error) {
-        localStorage.removeItem('lhl_admin_token');
-        loginPanel.hidden = false;
-        workspace.hidden = true;
-        document.getElementById('adminLoginError').textContent = 'Сессия истекла. Войдите снова.';
-        if (error.message.includes('(401)') || error.message.includes('(403)')) return;
-        console.error(error);
-        showToast('Не удалось проверить права доступа. Повторите попытку.');
-    }
-}
-
-async function loginAdmin(event) {
-    event.preventDefault();
-    const errorMessage = document.getElementById('adminLoginError');
-    errorMessage.textContent = '';
-    const email = document.getElementById('adminEmail').value;
-    const password = document.getElementById('adminPassword').value;
-    try {
-        const result = await fetchLeagueEndpoint('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-        localStorage.setItem('lhl_admin_token', result.access_token);
-        document.getElementById('adminPassword').value = '';
-        await renderAdminPage();
-    } catch (error) {
-        errorMessage.textContent = error.message.includes('(401)')
-            ? 'Неверный email или пароль.'
-            : 'Не удалось выполнить вход. Проверьте подключение и повторите попытку.';
-        if (!error.message.includes('(401)')) console.error(error);
-    }
-}
-
-function logoutAdmin() {
-    localStorage.removeItem('lhl_admin_token');
-    document.getElementById('adminLoginForm').reset();
-    document.getElementById('adminLoginError').textContent = '';
-    renderAdminPage();
-}
-
-function switchAdminSection(section, linkEl) {
-    adminSection = section;
-    document.querySelectorAll('#adminSidebar nav a').forEach(a => a.classList.remove('active'));
-    if (linkEl) linkEl.classList.add('active');
-    const contentArea = document.getElementById('adminContentArea');
-    const totalGoals = matchesData.filter(m => m.status === 'past').reduce((sum, m) =>
-        sum + (m.home_score || 0) + (m.away_score || 0), 0);
-
-    if (section === 'dashboard') {
-        contentArea.innerHTML = `
-      <div class="metric-cards">
-        <div class="metric-card glass-card"><div class="metric-icon">🛡</div><div class="metric-value">${teamsData.length}</div><div class="metric-label">Команд</div></div>
-        <div class="metric-card glass-card"><div class="metric-icon">👤</div><div class="metric-value">${Object.values(playersData).flat().length}</div><div class="metric-label">Игроков</div></div>
-        <div class="metric-card glass-card"><div class="metric-icon">📅</div><div class="metric-value">${matchesData.filter(m=>m.status==='past').length}</div><div class="metric-label">Сыгранных матчей</div></div>
-        <div class="metric-card glass-card"><div class="metric-icon">📰</div><div class="metric-value">${newsData.length}</div><div class="metric-label">Новостей</div></div>
-        <div class="metric-card glass-card"><div class="metric-icon">🥅</div><div class="metric-value">${totalGoals}</div><div class="metric-label">Всего голов</div></div>
-      </div>
-      <h3>Последняя новость</h3>
-      <p>${newsData[0]?.title || 'Новостей пока нет.'}</p>`;
-    } else if (section === 'news') {
-        contentArea.innerHTML = '<h3>📰 Новости</h3>' + newsData.map(n =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;"><strong>${n.title}</strong> — ${n.date}</div>`
-            ).join('');
-    } else if (section === 'matches') {
-        contentArea.innerHTML = '<h3>📅 Матчи</h3>' + matchesData.map(m =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;">Матч #${m.id} — Неделя ${m.week}</div>`
-            ).join('');
-    } else if (section === 'teams') {
-        contentArea.innerHTML = '<h3>🛡 Команды</h3>' + teamsData.map(t =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;"><strong>${t.name}</strong> — ${t.city}</div>`
-            ).join('');
-    } else if (section === 'players') {
-        const allPlayers = Object.values(playersData).flat();
-        contentArea.innerHTML = '<h3>👤 Игроки</h3>' + allPlayers.map(p =>
-            `<div class="glass-card" style="padding:14px;margin-bottom:8px;">${p.name} — ${p.position}</div>`
-            ).join('');
-    } else if (section === 'standings') {
-        contentArea.innerHTML = '<h3>📊 Турнирная таблица</h3>' + [...teamsData].sort((a, b) => b.points - a.points)
-            .map((t, i) => `<div class="glass-card" style="padding:14px;margin-bottom:8px;">#${i+1} ${t.name} — ${t.points} очков</div>`)
-            .join('');
-    }
-}
 // ==================== COUNTDOWN ====================
 function updateCountdown() {
     const upcomingMatch = matchesData.find(m => m.status === 'upcoming');
@@ -528,7 +446,6 @@ async function init() {
     const hash = window.location.hash.replace('#', '');
     if (hash === 'teams') navigateTo('teams');
     else if (hash === 'matches') navigateTo('matches');
-    else if (hash === 'admin') navigateTo('admin');
     else navigateTo('home');
     if (hash === 'teams') {
         const storedSlug = sessionStorage.getItem('currentTeamSlug');
@@ -541,7 +458,6 @@ async function init() {
         const h = window.location.hash.replace('#', '');
         if (h === 'teams') navigateTo('teams');
         else if (h === 'matches') navigateTo('matches');
-        else if (h === 'admin') navigateTo('admin');
         else if (h === 'home') navigateTo('home');
     });
 

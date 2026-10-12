@@ -1,6 +1,6 @@
 # LHL Hockey
 
-An amateur hockey league website and REST API built with NestJS, TypeScript, PostgreSQL, and a responsive HTML/CSS/JavaScript frontend. League standings, team rosters, fixtures, results, and news are stored in PostgreSQL and loaded by the browser through the API.
+An amateur hockey league website and REST API built with NestJS, TypeScript, PostgreSQL, and a responsive HTML/CSS/JavaScript frontend. Its public demo is ready to browse without an account, database, or environment configuration.
 
 ## Screenshots
 
@@ -19,6 +19,7 @@ Screenshots show the website with sample league records.
 - League homepage with standings, news, team directory, and match countdown.
 - Team profiles with roster, statistics, and match history.
 - Match schedule with status, week, and team filters.
+- Ready-to-browse portfolio site powered by bundled sample data when no API is connected.
 - PostgreSQL persistence for teams, players, matches, and news, initialized by a TypeORM migration.
 - Public REST endpoints: `GET /teams`, `GET /matches`, and `GET /news`.
 - JWT-protected staff login and role-guarded `GET /admin/dashboard`.
@@ -26,7 +27,18 @@ Screenshots show the website with sample league records.
 - Swagger UI at `/api/docs`.
 - NestJS unit tests, ESLint, Prettier, and TypeScript.
 
-## Local development
+## View the portfolio demo
+
+The site runs with sample league data out of the box:
+
+```bash
+npm ci
+npm run start:dev
+```
+
+Open `http://localhost:3000`. No sign-in, database, or `.env` file is needed. GitHub Actions publishes the same ready-to-view site to [GitHub Pages](https://baichau.github.io/LHL-hockey/).
+
+## Configure the optional database-backed API
 
 Requirements: Node.js 20 or newer and PostgreSQL.
 
@@ -51,7 +63,7 @@ Requirements: Node.js 20 or newer and PostgreSQL.
    npm run start:dev
    ```
 
-   TypeORM runs the initial schema and sample-data migration at startup. Open `http://localhost:3000`; API documentation is at `http://localhost:3000/api/docs`.
+   TypeORM runs the initial schema and sample-data migration at startup. When a database is configured, the browser loads data from the API; without one, it continues to display the bundled demo data. API documentation is at `http://localhost:3000/api/docs`.
 
 ## API
 
@@ -75,9 +87,9 @@ npm run build
 
 ## Deployment
 
-The repository includes a Render Blueprint in `render.yaml`. Create a Render PostgreSQL database, connect its internal connection string as `DATABASE_URL`, and set `ADMIN_EMAIL` and a bcrypt `ADMIN_PASSWORD_HASH` in the service environment. Render generates `JWT_SECRET`; the service runs `npm run build` and `npm run start:prod`. The initial database migration runs on service startup.
+The no-login demo is published to GitHub Pages on pushes to `main`. An optional API deployment can use the Render Blueprint in `render.yaml`: configure a PostgreSQL database, `DATABASE_URL`, `ADMIN_EMAIL`, a bcrypt `ADMIN_PASSWORD_HASH`, and a random `JWT_SECRET`. The initial database migration runs on service startup.
 
-Set `DATABASE_SSL=true` only when the selected PostgreSQL provider requires TLS. Add the deployed URL to the repository About section after deployment.
+Set `DATABASE_SSL=true` only when the selected PostgreSQL provider requires TLS.
 
 ## Repository topics
 

@@ -16,23 +16,35 @@ import { NewsService } from './news/news.service';
 import { TeamsController } from './teams/teams.controller';
 import { TeamsService } from './teams/teams.service';
 
+const databaseConfigured = Boolean(process.env.DATABASE_URL?.trim());
+const databaseModules = databaseConfigured
+  ? [
+      TypeOrmModule.forRoot({
+        type: 'postgres' as const,
+        url: process.env.DATABASE_URL,
+        entities: [Team, Player, Match, News],
+        migrations: [join(__dirname, 'database', 'migrations', '*{.ts,.js}')],
+        migrationsRun: true,
+        synchronize: false,
+        ssl:
+          process.env.DATABASE_SSL === 'true'
+            ? { rejectUnauthorized: false }
+            : false,
+      }),
+      TypeOrmModule.forFeature([Team, Player, Match, News]),
+    ]
+  : [];
+
+const authConfigured = Boolean(
+  process.env.JWT_SECRET?.trim() &&
+  process.env.ADMIN_EMAIL?.trim() &&
+  process.env.ADMIN_PASSWORD_HASH?.trim(),
+);
+
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.DATABASE_URL,
-      entities: [Team, Player, Match, News],
-      migrations: [join(__dirname, 'database', 'migrations', '*{.ts,.js}')],
-      migrationsRun: true,
-      synchronize: false,
-      ssl:
-        process.env.DATABASE_SSL === 'true'
-          ? { rejectUnauthorized: false }
-          : false,
-    }),
-    TypeOrmModule.forFeature([Team, Player, Match, News]),
-    AuthModule,
-    AdminModule,
+    ...databaseModules,
+    ...(authConfigured ? [AuthModule, AdminModule] : []),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),

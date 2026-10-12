@@ -1,16 +1,36 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Optional } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Team } from '../database/entities/team.entity';
+import { readDemoData } from '../demo-data';
+
+export interface TeamResponse extends Omit<Team, 'roster'> {
+  players: number;
+  roster: Array<{
+    id: number;
+    name: string;
+    number: number;
+    position: string;
+    age: number;
+    nationality: string;
+    goals: number;
+    assists: number;
+    pim: number;
+    avatar_color: string;
+  }>;
+}
 
 @Injectable()
 export class TeamsService {
   constructor(
+    @Optional()
     @InjectRepository(Team)
-    private readonly teams: Repository<Team>,
+    private readonly teams?: Repository<Team>,
   ) {}
 
   async findAll() {
+    if (!this.teams) return readDemoData<TeamResponse[]>('teams.json');
+
     const teams = await this.teams.find({
       relations: { roster: true },
       order: { position: 'ASC', id: 'ASC' },

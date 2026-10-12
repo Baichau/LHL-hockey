@@ -15,36 +15,41 @@ describe('League API (e2e)', () => {
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       controllers: [TeamsController, MatchesController, NewsController],
-      providers: [
-        {
-          provide: TeamsService,
-          useValue: { findAll: jest.fn().mockResolvedValue([]) },
-        },
-        {
-          provide: MatchesService,
-          useValue: { findAll: jest.fn().mockResolvedValue([]) },
-        },
-        {
-          provide: NewsService,
-          useValue: { findAll: jest.fn().mockResolvedValue([]) },
-        },
-      ],
+      providers: [TeamsService, MatchesService, NewsService],
     }).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('GET /teams returns the team list', () => {
-    return request(app.getHttpServer()).get('/teams').expect(200).expect([]);
+  it('GET /teams returns demo teams and player rosters', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/teams')
+      .expect(200);
+
+    const teams = JSON.parse(response.text) as Array<{ roster: unknown[] }>;
+    expect(teams).toHaveLength(8);
+    expect(teams[0].roster.length).toBeGreaterThan(0);
   });
 
-  it('GET /matches returns the match list', () => {
-    return request(app.getHttpServer()).get('/matches').expect(200).expect([]);
+  it('GET /matches returns demo fixtures', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/matches')
+      .expect(200);
+
+    const matches = JSON.parse(response.text) as Array<Record<string, unknown>>;
+    expect(matches).toHaveLength(8);
+    expect(matches[0]).toHaveProperty('home_team_id');
   });
 
-  it('GET /news returns the news list', () => {
-    return request(app.getHttpServer()).get('/news').expect(200).expect([]);
+  it('GET /news returns demo league news', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/news')
+      .expect(200);
+
+    const news = JSON.parse(response.text) as Array<Record<string, unknown>>;
+    expect(news).toHaveLength(4);
+    expect(news[0]).toHaveProperty('image_emoji');
   });
 
   afterEach(async () => {

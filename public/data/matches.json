@@ -1,0 +1,207 @@
+[
+  {
+    "id": 1,
+    "home_team_id": 1,
+    "away_team_id": 2,
+    "date": "2026-10-15T19:00:00Z",
+    "status": "upcoming",
+    "week": 2,
+    "home_score": null,
+    "away_score": null,
+    "goals": [],
+    "is_best": true
+  },
+  {
+    "id": 2,
+    "home_team_id": 3,
+    "away_team_id": 4,
+    "date": "2026-10-10T17:30:00Z",
+    "status": "past",
+    "week": 1,
+    "home_score": 3,
+    "away_score": 2,
+    "goals": [
+      {
+        "scorer": "Роман Сидоров",
+        "minute": 12,
+        "assist": "Евгений Кузнецов"
+      },
+      {
+        "scorer": "Роман Сидоров",
+        "minute": 28,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Уральские Рыси",
+        "minute": 35,
+        "assist": "Капитан Команды"
+      },
+      {
+        "scorer": "Роман Сидоров",
+        "minute": 52,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Уральские Рыси",
+        "minute": 58,
+        "assist": null
+      }
+    ],
+    "is_best": true
+  },
+  {
+    "id": 3,
+    "home_team_id": 5,
+    "away_team_id": 6,
+    "date": "2026-10-17T20:00:00Z",
+    "status": "upcoming",
+    "week": 2,
+    "home_score": null,
+    "away_score": null,
+    "goals": [],
+    "is_best": false
+  },
+  {
+    "id": 4,
+    "home_team_id": 7,
+    "away_team_id": 8,
+    "date": "2026-10-09T16:00:00Z",
+    "status": "past",
+    "week": 1,
+    "home_score": 4,
+    "away_score": 5,
+    "goals": [
+      {
+        "scorer": "Игрок Кубанские Грифоны",
+        "minute": 5,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Невские Львы",
+        "minute": 14,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Кубанские Грифоны",
+        "minute": 22,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Невские Львы",
+        "minute": 31,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Невские Львы",
+        "minute": 44,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Кубанские Грифоны",
+        "minute": 50,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Невские Львы",
+        "minute": 55,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Невские Львы",
+        "minute": 59,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Кубанские Грифоны",
+        "minute": 60,
+        "assist": null
+      }
+    ],
+    "is_best": true
+  },
+  {
+    "id": 5,
+    "home_team_id": 1,
+    "away_team_id": 5,
+    "date": "2026-10-19T19:30:00Z",
+    "status": "upcoming",
+    "week": 2,
+    "home_score": null,
+    "away_score": null,
+    "goals": [],
+    "is_best": false
+  },
+  {
+    "id": 6,
+    "home_team_id": 2,
+    "away_team_id": 3,
+    "date": "2026-10-08T18:00:00Z",
+    "status": "past",
+    "week": 1,
+    "home_score": 2,
+    "away_score": 1,
+    "goals": [
+      {
+        "scorer": "Артём Громов",
+        "minute": 18,
+        "assist": "Сергей Фёдоров"
+      },
+      {
+        "scorer": "Артём Громов",
+        "minute": 42,
+        "assist": null
+      },
+      {
+        "scorer": "Роман Сидоров",
+        "minute": 55,
+        "assist": "Евгений Кузнецов"
+      }
+    ],
+    "is_best": false
+  },
+  {
+    "id": 7,
+    "home_team_id": 4,
+    "away_team_id": 6,
+    "date": "2026-10-21T20:30:00Z",
+    "status": "upcoming",
+    "week": 3,
+    "home_score": null,
+    "away_score": null,
+    "goals": [],
+    "is_best": false
+  },
+  {
+    "id": 8,
+    "home_team_id": 8,
+    "away_team_id": 7,
+    "date": "2026-10-07T15:00:00Z",
+    "status": "past",
+    "week": 1,
+    "home_score": 1,
+    "away_score": 3,
+    "goals": [
+      {
+        "scorer": "Игрок Невские Львы",
+        "minute": 25,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Кубанские Грифоны",
+        "minute": 38,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Кубанские Грифоны",
+        "minute": 47,
+        "assist": null
+      },
+      {
+        "scorer": "Игрок Кубанские Грифоны",
+        "minute": 53,
+        "assist": null
+      }
+    ],
+    "is_best": false
+  }
+]
