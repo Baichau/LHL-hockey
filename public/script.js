@@ -24,23 +24,22 @@ async function loadLeagueData() {
     let teams;
     let matches;
     let news;
-    try {
-        [teams, matches, news] = await Promise.all([
-            fetchLeagueEndpoint('/teams'),
-            fetchLeagueEndpoint('/matches'),
-            fetchLeagueEndpoint('/news'),
-        ]);
-        if (!Array.isArray(teams) || !Array.isArray(matches) || !Array.isArray(news)) {
-            throw new Error('The league API returned an invalid response.');
+    if (window.location.hostname.endsWith('.github.io')) {
+        [teams, matches, news] = await fetchBundledLeagueData();
+    } else {
+        try {
+            [teams, matches, news] = await Promise.all([
+                fetchLeagueEndpoint('/teams'),
+                fetchLeagueEndpoint('/matches'),
+                fetchLeagueEndpoint('/news'),
+            ]);
+            if (!Array.isArray(teams) || !Array.isArray(matches) || !Array.isArray(news)) {
+                throw new Error('The league API returned an invalid response.');
+            }
+        } catch (error) {
+            console.info('League API is not connected; loading the public demo data.');
+            [teams, matches, news] = await fetchBundledLeagueData();
         }
-    } catch (error) {
-        console.info('League API is not connected; loading the public demo data.');
-        const baseUrl = new URL('script.js', window.location.href);
-        [teams, matches, news] = await Promise.all([
-            fetchDemoEndpoint(new URL('data/teams.json', baseUrl)),
-            fetchDemoEndpoint(new URL('data/matches.json', baseUrl)),
-            fetchDemoEndpoint(new URL('data/news.json', baseUrl)),
-        ]);
     }
     if (!Array.isArray(teams) || !Array.isArray(matches) || !Array.isArray(news)) {
         throw new Error('The league API or demo data returned an invalid response.');
@@ -49,6 +48,15 @@ async function loadLeagueData() {
     playersData = Object.fromEntries(teams.map(team => [team.slug, team.roster || []]));
     matchesData = matches;
     newsData = news;
+}
+
+function fetchBundledLeagueData() {
+    const baseUrl = new URL('script.js', window.location.href);
+    return Promise.all([
+        fetchDemoEndpoint(new URL('data/teams.json', baseUrl)),
+        fetchDemoEndpoint(new URL('data/matches.json', baseUrl)),
+        fetchDemoEndpoint(new URL('data/news.json', baseUrl)),
+    ]);
 }
 
 async function fetchDemoEndpoint(url) {
